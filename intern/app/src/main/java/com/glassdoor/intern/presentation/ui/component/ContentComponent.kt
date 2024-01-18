@@ -34,12 +34,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.glassdoor.intern.presentation.model.HeaderUiModel
 import com.glassdoor.intern.presentation.model.ItemUiModel
 import com.glassdoor.intern.presentation.theme.InternTheme
@@ -142,7 +144,10 @@ private fun ItemComponent(item: ItemUiModel) = Card {
                 contentDescription = title,
                 contentScale = ContentScale.Crop,
                 error = rememberVectorPainter(Icons.Default.Warning),
-                model = TODO("[Request an image download](https://github.com/coil-kt/coil#requests)"),
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data("https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.cnn.com%2Fapi%2Fv1%2Fimages%2Fstellar%2Fprod%2F191006152638-01-pets-and-our-health.jpg%3Fq%3Dw_2000%2Ch_1125%2Cx_0%2Cy_0%2Cc_fill%2Fh_618&tbnid=T7NgE_sm4Mg1TM&vet=12ahUKEwiJq8WRieiDAxVGN0QIHa-OCS4QMygVegUIARCeAQ..i&imgrefurl=https%3A%2F%2Fwww.cnn.com%2F2021%2F08%2F26%2Fhealth%2Fnational-dog-day-2021-benefits-of-dogs-wellness%2Findex.html&docid=3gw4Av_mtoeubM&w=1099&h=618&q=dog&ved=2ahUKEwiJq8WRieiDAxVGN0QIHa-OCS4QMygVegUIARCeAQ")
+                    .crossfade(true)
+                    .build(),
             )
         }
     }
