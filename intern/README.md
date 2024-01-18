@@ -15,9 +15,9 @@ After the deadline, **every 4 hours of delay** are counted as **minus 1 point**.
 
 ### Preparations
 
-- [ ] Download and install the latest (stable) version of [Android Studio](https://developer.android.com/studio)
-- [ ] Download and extract the **Homework Project** to the destination folder
-- [ ] [Enable version control system for the project](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
+- [x] Download and install the latest (stable) version of [Android Studio](https://developer.android.com/studio)
+- [x] Download and extract the **Homework Project** to the destination folder
+- [x] [Enable version control system for the project](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github)
 
 ### Instructions
 
