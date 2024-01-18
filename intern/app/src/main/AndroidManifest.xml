@@ -18,6 +18,7 @@
     <!--  TODO: [Specify application class](https://developer.android.com/reference/android/app/Application)  -->
 
     <application
+        android:name=".InternApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
