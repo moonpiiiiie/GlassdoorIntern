@@ -35,6 +35,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -151,6 +152,7 @@ private fun ItemComponent(item: ItemUiModel) = Card {
                     .align(Alignment.Top)
                     .size(imageSize)
                     .clip(CardDefaults.shape),
+                placeholder = painterResource(androidx.core.R.drawable.ic_call_answer),
                 contentDescription = title,
                 contentScale = ContentScale.Crop,
                 error = rememberVectorPainter(Icons.Default.Warning),
@@ -204,6 +206,24 @@ private class ContentComponentPreviewParameterProvider :
             listOf(
                 ItemUiModel(
                     title = "Item Title 1",
+                    description = "Item Description 1",
+                    imageUrl ="https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80",
+                    timestamp = "10:00 AM"
+                ),
+                ItemUiModel(
+                    title = "Item Title 2",
+                    description = "Item Description 1",
+                    imageUrl ="https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80",
+                    timestamp = "10:00 AM"
+                ),
+                ItemUiModel(
+                    title = "Item Title 3",
+                    description = "Item Description 1",
+                    imageUrl ="https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80",
+                    timestamp = "10:00 AM"
+                ),
+                ItemUiModel(
+                    title = "Item Title 4",
                     description = "Item Description 1",
                     imageUrl ="https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80",
                     timestamp = "10:00 AM"

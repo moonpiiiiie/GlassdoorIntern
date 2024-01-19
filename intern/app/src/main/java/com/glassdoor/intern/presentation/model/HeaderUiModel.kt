@@ -21,10 +21,8 @@ import kotlinx.parcelize.Parcelize
 @Immutable
 @Parcelize
 internal class HeaderUiModel(
-    val title: String,
-    val items: List<ItemUiModel>
+    val title: String
 ) : Parcelable {
     @IgnoredOnParcel
     val isEmpty: Boolean get() = title.isEmpty()
-
 }

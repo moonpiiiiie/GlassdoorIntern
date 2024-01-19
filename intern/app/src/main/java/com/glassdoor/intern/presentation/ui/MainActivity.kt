@@ -13,7 +13,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.runtime.collectAsState
 import com.glassdoor.intern.presentation.MainViewModel
+import com.glassdoor.intern.presentation.model.HeaderUiModel
 import com.glassdoor.intern.presentation.theme.InternTheme
 
 /**
@@ -28,9 +30,11 @@ internal class MainActivity : ComponentActivity() {
 
         setContent {
             InternTheme {
+
                 /**
                  * TODO: Define the main composable to display
                  */
+                MainScreen(viewModel = viewModel)
             }
         }
     }
