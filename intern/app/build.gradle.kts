@@ -96,5 +96,5 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     implementation("com.squareup.okhttp3:logging-interceptor")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation("io.coil-kt:coil:2.5.0")
+
 }

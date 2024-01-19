@@ -17,10 +17,12 @@ import androidx.compose.runtime.collectAsState
 import com.glassdoor.intern.presentation.MainViewModel
 import com.glassdoor.intern.presentation.model.HeaderUiModel
 import com.glassdoor.intern.presentation.theme.InternTheme
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * TODO: [Annotate a class for dependency injection](https://developer.android.com/training/dependency-injection/hilt-android#android-classes)
  */
+@AndroidEntryPoint
 internal class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
