@@ -75,6 +75,7 @@ internal fun ContentComponent(
          */
         items(
             items = items,
+            key = { item -> item.key },
             itemContent = { item -> ItemComponent(item) },
         )
     }
@@ -101,6 +102,14 @@ private fun HeaderComponent(
             /**
              * TODO: [Declare the UI](https://developer.android.com/codelabs/jetpack-compose-basics#5) based on the UI model structure
              */
+            if (!isEmpty) {
+                // Display the icon if it exists
+                // Display the title
+                Column(modifier = Modifier.fillMaxWidth().padding(24.dp)) {
+                    Text(text = title)
+                }
+            }
+
         }
     }
 }
@@ -145,13 +154,15 @@ private fun ItemComponent(item: ItemUiModel) = Card {
                 contentScale = ContentScale.Crop,
                 error = rememberVectorPainter(Icons.Default.Warning),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data("https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.cnn.com%2Fapi%2Fv1%2Fimages%2Fstellar%2Fprod%2F191006152638-01-pets-and-our-health.jpg%3Fq%3Dw_2000%2Ch_1125%2Cx_0%2Cy_0%2Cc_fill%2Fh_618&tbnid=T7NgE_sm4Mg1TM&vet=12ahUKEwiJq8WRieiDAxVGN0QIHa-OCS4QMygVegUIARCeAQ..i&imgrefurl=https%3A%2F%2Fwww.cnn.com%2F2021%2F08%2F26%2Fhealth%2Fnational-dog-day-2021-benefits-of-dogs-wellness%2Findex.html&docid=3gw4Av_mtoeubM&w=1099&h=618&q=dog&ved=2ahUKEwiJq8WRieiDAxVGN0QIHa-OCS4QMygVegUIARCeAQ")
+                    .data(item.imageUrl)
                     .crossfade(true)
-                    .build(),
+                    .build()
             )
         }
     }
 }
+
+
 
 @Preview
 @Composable
@@ -187,12 +198,26 @@ private typealias HeaderAndItems = Pair<HeaderUiModel, List<ItemUiModel>>
 
 private class ContentComponentPreviewParameterProvider :
     PreviewParameterProvider<HeaderAndItems> by previewParameterProviderOf(
-        TODO("Define UI models for preview purposes")
+        HeaderAndItems(
+            HeaderUiModel(title = "Header Title"),
+            listOf(
+                ItemUiModel(
+                    title = "Item Title 1",
+                    description = "Item Description 1",
+                    imageUrl ="https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80",
+                    timestamp = "10:00 AM"
+                ),
+                // Add more items as needed
+            )
+        )
+
     )
 
 private class HeaderComponentPreviewParameterProvider :
     PreviewParameterProvider<HeaderUiModel> by previewParameterProviderOf(
-        TODO("Define UI models for preview purposes")
+        HeaderUiModel(
+            title = "Sample Title"
+        )
     )
 
 private class ItemComponentPreviewParameterProvider :
@@ -200,7 +225,7 @@ private class ItemComponentPreviewParameterProvider :
         ItemUiModel(
             title = "Item Title 0",
             description = "Item Description 0",
-            imageUrl = null,
+            imageUrl = "https://images.unsplash.com/photo-1628373383885-4be0bc0172fa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1301&q=80",
             timestamp = "10:00",
         ),
     )

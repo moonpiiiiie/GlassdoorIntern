@@ -19,8 +19,9 @@ import kotlinx.parcelize.Parcelize
  */
 @Immutable
 @Parcelize
-internal class HeaderUiModel() : Parcelable {
-
+internal class HeaderUiModel(
+    val title: String
+) : Parcelable {
     @IgnoredOnParcel
-    val isEmpty: Boolean = TODO("Define empty state")
+    val isEmpty: Boolean get() = title.isEmpty()
 }
