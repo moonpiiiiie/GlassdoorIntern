@@ -12,6 +12,7 @@ package com.glassdoor.intern.presentation
 import androidx.lifecycle.ViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
+import com.glassdoor.intern.domain.model.HeaderInfo
 import com.glassdoor.intern.domain.usecase.GetHeaderInfoUseCase
 import com.glassdoor.intern.presentation.MainIntent.HideErrorMessage
 import com.glassdoor.intern.presentation.MainIntent.RefreshScreen
@@ -21,6 +22,7 @@ import com.glassdoor.intern.presentation.MainUiState.PartialState.ShowLoadingSta
 import com.glassdoor.intern.presentation.MainUiState.PartialState.UpdateErrorMessageState
 import com.glassdoor.intern.presentation.MainUiState.PartialState.UpdateHeaderState
 import com.glassdoor.intern.presentation.MainUiState.PartialState.UpdateItemsState
+import com.glassdoor.intern.presentation.mapper.HeaderUiModelMapper
 import com.glassdoor.intern.presentation.mapper.ItemUiModelMapper
 import com.glassdoor.intern.utils.presentation.UiStateMachine
 import com.glassdoor.intern.utils.presentation.UiStateMachineFactory
@@ -44,6 +46,7 @@ internal class MainViewModel @Inject constructor(
     uiStateMachineFactory: UiStateMachineFactory,
     private val getHeaderInfoUseCase: GetHeaderInfoUseCase,
     private val itemUiModelMapper: ItemUiModelMapper,
+    private val headerUiModelMapper: HeaderUiModelMapper
 ) : ViewModel(), IMainViewModel {
 
     /**
@@ -52,9 +55,9 @@ internal class MainViewModel @Inject constructor(
     private val uiStateMachine: UiStateMachine<MainUiState, PartialState, MainIntent> =
         uiStateMachineFactory.create(
             defaultUiState = defaultUiState,
-            errorTransform = { emptyFlow() },
-            intentTransform = { emptyFlow() },
-            updateUiState = { s, _ -> s },
+            errorTransform = ::errorTransform,
+            intentTransform = ::intentTransform,
+            updateUiState = ::updateUiState,
         )
 
     override val uiState: StateFlow<MainUiState> = uiStateMachine.uiState
@@ -63,12 +66,17 @@ internal class MainViewModel @Inject constructor(
         /**
          * TODO: Refresh the screen only when the header is empty
          */
+        if (defaultUiState.header.isEmpty) {
+            uiStateMachine.acceptIntent(MainIntent.RefreshScreen)
+        }
     }
 
     /**
      * TODO: Delegate method to [uiStateMachine]
      */
-    override fun acceptIntent(intent: MainIntent) = Unit
+    override fun acceptIntent(intent: MainIntent) {
+        uiStateMachine.acceptIntent(intent)
+    }
 
     private fun errorTransform(throwable: Throwable): Flow<PartialState> = flow {
         Timber.e(throwable, "MainViewModel")
@@ -89,11 +97,18 @@ internal class MainViewModel @Inject constructor(
         previousUiState: MainUiState,
         partialState: PartialState,
     ): MainUiState = when (partialState) {
-        HideLoadingState, ShowLoadingState -> {
-            /**
-             * TODO: Separate handling and update correct properties [previousUiState]
-             */
-            previousUiState
+//        HideLoadingState, ShowLoadingState -> {
+//            /**
+//             * TODO: Separate handling and update correct properties [previousUiState]
+//             */
+//            previousUiState
+//        }
+        is HideLoadingState -> with (partialState) {
+            previousUiState.copy(isLoading = false)
+        }
+
+        is ShowLoadingState -> with (partialState) {
+            previousUiState.copy(isLoading = true)
         }
 
         is UpdateErrorMessageState -> with(partialState) {
@@ -124,7 +139,7 @@ internal class MainViewModel @Inject constructor(
                  * TODO: Transform the header domain model to the UI model
                  * TODO: Emit the transformed UI model as state
                  */
-
+                emit(UpdateHeaderState(header = headerUiModelMapper.toUiModel(headerInfo)))
                 emit(UpdateItemsState(headerInfo.items.map(itemUiModelMapper::toUiModel)))
             }
             .onFailure { throwable ->
