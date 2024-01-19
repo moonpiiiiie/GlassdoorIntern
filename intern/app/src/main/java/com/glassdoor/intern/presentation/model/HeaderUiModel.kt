@@ -11,6 +11,7 @@ package com.glassdoor.intern.presentation.model
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable
+import com.glassdoor.intern.domain.model.ItemInfo
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -20,8 +21,10 @@ import kotlinx.parcelize.Parcelize
 @Immutable
 @Parcelize
 internal class HeaderUiModel(
-    val title: String
+    val title: String,
+    val items: List<ItemUiModel>
 ) : Parcelable {
     @IgnoredOnParcel
     val isEmpty: Boolean get() = title.isEmpty()
+
 }
