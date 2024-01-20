@@ -16,6 +16,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
+import javax.inject.Qualifier
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
@@ -36,8 +37,13 @@ internal object CoroutineModule {
     /**
      * TODO: Annotate dependency with the correct [qualifier label](https://developer.android.com/training/dependency-injection/hilt-android#multiple-bindings)
      */
+    @Qualifier
+    @Retention(AnnotationRetention.BINARY)
+    annotation class DefaultCoroutineContext
+
     @Singleton
     @Provides
+    @DefaultCoroutineContext
     fun provideCoroutineContextDefault(
         coroutineContextFactory: CoroutineContextFactory
     ): CoroutineContext =

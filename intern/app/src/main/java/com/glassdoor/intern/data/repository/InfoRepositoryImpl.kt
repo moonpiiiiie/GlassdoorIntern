@@ -17,8 +17,10 @@ import com.glassdoor.intern.data.model.ItemInfoDto
 import com.glassdoor.intern.data.source.InfoApi
 import com.glassdoor.intern.domain.model.HeaderInfo
 import com.glassdoor.intern.domain.repository.InfoRepository
+import dagger.Provides
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * TODO: Inject the correct mapper dependency

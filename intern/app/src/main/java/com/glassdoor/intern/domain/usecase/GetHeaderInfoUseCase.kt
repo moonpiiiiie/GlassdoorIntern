@@ -12,4 +12,5 @@ package com.glassdoor.intern.domain.usecase
 import com.github.michaelbull.result.Result
 import com.glassdoor.intern.domain.model.HeaderInfo
 
+
 fun interface GetHeaderInfoUseCase : suspend () -> Result<HeaderInfo, Throwable>

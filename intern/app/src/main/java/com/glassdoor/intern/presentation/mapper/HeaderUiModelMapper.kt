@@ -21,7 +21,7 @@ internal class HeaderUiModelMapper @Inject constructor( private val itemUiModelM
     fun toUiModel(headerInfo: HeaderInfo): HeaderUiModel = with(headerInfo) {
         HeaderUiModel(
             title = title,
-            items = items.map(itemUiModelMapper::toUiModel)
+//            items = items.map(itemUiModelMapper::toUiModel)
         )
     }
 }

@@ -15,6 +15,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 /**
@@ -23,6 +24,7 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 internal object DomainModule {
 
+    @Singleton
     @Provides
     fun provideGetHeaderInfoUseCase(
         infoRepository: InfoRepository

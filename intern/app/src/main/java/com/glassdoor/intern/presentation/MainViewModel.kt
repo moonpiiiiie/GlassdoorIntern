@@ -26,6 +26,7 @@ import com.glassdoor.intern.presentation.mapper.HeaderUiModelMapper
 import com.glassdoor.intern.presentation.mapper.ItemUiModelMapper
 import com.glassdoor.intern.utils.presentation.UiStateMachine
 import com.glassdoor.intern.utils.presentation.UiStateMachineFactory
+import dagger.Provides
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,6 +35,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Singleton
 
 internal interface IMainViewModel : UiStateMachine<MainUiState, PartialState, MainIntent>
 
